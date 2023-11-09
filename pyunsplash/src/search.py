@@ -29,11 +29,11 @@ class Search(UnsplashPage):
 
     @property
     def entries(self):
-        if self.url == 'photos' or self.url.endswith('/photos'):
+        if self.url == 'photos' or self.url.endswith('/photos') or '/photos' in self.url:
             class_cast = Photo
-        elif self.url == 'collections' or self.url.endswith('/collections'):
+        elif self.url == 'collections' or self.url.endswith('/collections') or '/collections' in self.url:
             class_cast = Collection
-        elif self.url == 'users' or self.url.endswith('/users'):
+        elif self.url == 'users' or self.url.endswith('/users') or '/users' in self.url:
             class_cast = User
         for entry in self.body.get('results', []):
             yield class_cast(api_key=self.api_key, source=entry)
